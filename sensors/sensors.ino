@@ -2,21 +2,27 @@
 #define dht_apin A1
 dht DHT;
 
-//Motor 1
 const int in1  = 13;
-const int in2  = 7; 
-
 int speed = 180;
 
-
 void setup() {
-  Serial.begin(9600); 
-  //Set pins as outputs
+  Serial.begin(9600);
   pinMode(in1, OUTPUT);
-  pinMode(in2, OUTPUT);
 }
 
 void loop() {  
+  readData();
+  readCommand();
+}
+
+void readCommand() {
+    if (Serial.available() > 0) {
+        char receivedChar = Serial.read();
+        startMotor();
+    }
+}
+
+void readData() {
   int val;  
   val = analogRead(0); //connect sensor to Analog 0   
   Serial.print(val); //print the value to serial port   
@@ -27,10 +33,11 @@ void loop() {
   Serial.print(DHT.temperature);
   Serial.println("");
   delay(1000);
-
-
-  //Motor Control A in both directions
-  analogWrite(in1, speed);
-  delay(2000); 
-  analogWrite(in1, 0);
 }
+
+//run motor for 15 seconds on one side and stop it
+void startMotor(){
+  analogWrite(in1, speed);
+  delay(15000); 
+  analogWrite(in1, 0);
+ }
