@@ -16,10 +16,10 @@ void loop() {
 }
 
 void readCommand() {
-    if (Serial.available() > 0) {
-        char receivedChar = Serial.read();
-        startMotor();
-    }
+  if (Serial.available() > 0) {
+    String data = Serial.readStringUntil('\n');
+    startMotor(data.toInt());
+  }
 }
 
 void readData() {
@@ -36,8 +36,8 @@ void readData() {
 }
 
 //run motor for 15 seconds on one side and stop it
-void startMotor(){
+void startMotor(int runtime){
   analogWrite(in1, speed);
-  delay(15000); 
+  delay(runtime); 
   analogWrite(in1, 0);
  }
