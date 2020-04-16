@@ -1,0 +1,22 @@
+<html>
+<head>
+	<link rel="stylesheet" href='/static/style.css' />
+
+</head>
+<body>
+	<div id="content" >
+		<p><strong>Land Moisture: {{ landMoisture }}</strong></p>
+		<p><strong>Air temperature: {{ temperature }}</strong></p>
+		<p><strong>Air Moisture: {{ airMoisture }}</strong></p>
+
+		<form action="/start" method="get" class="form-example">
+			<input type="number" name="seconds" id="seconds" placeholder="seconds" required>
+			<input type="submit" value="Start pump">
+		</form>
+
+	</div>
+
+
+<script type="text/javascript" src="/static/code.js" charset="utf-8"></script>
+</body>
+</html>
