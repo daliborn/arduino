@@ -7,8 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     read_serial = flower.read()
-    return render_template('index.html', landMoisture=read_serial[0], temperature=read_serial[1],
-                           airMoisture=read_serial[2])
+    return render_template('index.html', landMoisture=read_serial[0], airMoisture=read_serial[1], temperature=read_serial[2])
 
 
 @app.route('/start')

@@ -16,7 +16,7 @@ def write(seconds):
     if ser is not None:
         time.sleep(2)
         #ser.write(b"20000\n")
-        ser.write(ardseconds.to_bytes())
+        ser.write(ardseconds.encode())
 
 def read():
     if ser is not None and ser.inWaiting() > 0:
