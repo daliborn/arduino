@@ -13,14 +13,23 @@ except SerialException:
 def write(seconds):
     ardseconds = f"{int(seconds) * 1000}\n"
     print(ardseconds)
-    if ser is not None:
-        time.sleep(2)
-        #ser.write(b"20000\n")
-        ser.write(ardseconds.encode())
+    try:
+        if ser is not None:
+            time.sleep(2)
+            # ser.write(b"20000\n")
+            ser.write(ardseconds.encode())
+    except Exception:
+        print('Exception ')
+        return ["0", "0", "0"]
+
 
 def read():
-    if ser is not None and ser.inWaiting() > 0:
-        res = ser.readline().decode().rstrip()
-        return res.split(',')
-    else:
-        return ["100", "200", "300"]
+    try:
+        if ser is not None and ser.inWaiting() > 0:
+            res = ser.readline().decode().rstrip()
+            return res.split(',')
+        else:
+            return ["100", "200", "300"]
+    except Exception:
+        print('Exception ')
+        return ["0", "0", "0"]
